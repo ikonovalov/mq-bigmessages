@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.codeunited.wmq</groupId>
+    <artifactId>mqbig</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mq.home>/opt/mqm</mq.home>
+        <mq.java.lib>${mq.home}/java/lib</mq.java.lib>
+        <mq.version>7.5.0</mq.version>
+    </properties>
+
+    <dependencies>
+        <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- WMQ -->
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>commonservices</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mq.commonservices.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>headers</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mq.headers.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>mq</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mq.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>jmqi</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mq.jmqi.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>pcf</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mq.pcf.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>javax.resource</groupId>
+            <artifactId>connector</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/connector.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>jmqi</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mq.jmqi.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>dhbcore</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/dhbcore.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm</groupId>
+            <artifactId>mqjms</artifactId>
+            <version>${mq.version}</version>
+            <scope>system</scope>
+            <systemPath>${mq.java.lib}/com.ibm.mqjms.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
