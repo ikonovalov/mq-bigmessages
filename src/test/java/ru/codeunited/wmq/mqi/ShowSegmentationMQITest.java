@@ -4,6 +4,7 @@ import com.ibm.mq.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.codeunited.wmq.Utils;
 import ru.codeunited.wmq.mqi.impl.MessageConsumerImpl;
 import ru.codeunited.wmq.mqi.impl.MessageProducerImpl;
 import ru.codeunited.wmq.mqi.impl.QueueManagerFactoryImpl;
@@ -12,15 +13,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import static com.ibm.mq.constants.MQConstants.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertArrayEquals;
-import static ru.codeunited.wmq.mqi.BaseFunction.close;
-import static ru.codeunited.wmq.mqi.BaseFunction.getManager;
-
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import ru.codeunited.wmq.Utils;
 
 /**
  * codeunited.ru
@@ -53,13 +53,12 @@ public class ShowSegmentationMQITest {
     @Test
     public void putBigMessage() throws MQException, IOException, NoMessageAvailableException {
 
-        final int BIG_BLOCK = 2048;
+        final int BIG_BLOCK = 32768;
         MQQueueManager manager = null;
         byte[] sentMessageID = null;
         byte[] gotMessageID = null;
 
-        byte[] bigBlock = new byte[BIG_BLOCK];
-        Arrays.fill(bigBlock, (byte) 55);
+        byte[] bigBlock = Utils.generateRandomBytes(BIG_BLOCK);
 
         try {
             // perform connection
@@ -111,7 +110,30 @@ public class ShowSegmentationMQITest {
         } finally {
             close(manager);
         }
+    }
 
+    static MQQueueManager getManager(QueueManagerFactory managerFactory) throws MQException {
+        MQQueueManager manager;
+        manager = managerFactory.getManager("DEFQM", new Properties() {
+            {
+                put(HOST_NAME_PROPERTY, "localhost");
+                put(PORT_PROPERTY, 1414);
+                put(TRANSPORT_PROPERTY, TRANSPORT_MQSERIES_CLIENT);
+                put(CHANNEL_PROPERTY, "JVM.DEF.SVRCONN");
+                put(USER_ID_PROPERTY, "ikonovalov");
+                //put(PASSWORD_PROPERTY, "");
+            }
+        });
+        return manager;
+    }
 
+    static void close(MQQueueManager manager) {
+        if (manager != null) {
+            try {
+                manager.close();
+            } catch (MQException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
