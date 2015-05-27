@@ -11,14 +11,26 @@ import com.ibm.mq.MQPutMessageOptions;
  */
 public abstract class MessageSetup {
 
+    /**
+     * Prepare MQMessage before MQPUT/MQGET operations.
+     * @param message
+     */
     public void setup(MQMessage message) {
 
     }
 
+    /**
+     * Prepare MQPutMessageOptions before MQPUT operation.
+     * @param putOptions
+     */
     public void setup(MQPutMessageOptions putOptions) {
 
     }
 
+    /**
+     * Prepare MQGetMessageOptions before MQGET operation.
+     * @param getOptions
+     */
     public void setup(MQGetMessageOptions getOptions) {
 
     }
