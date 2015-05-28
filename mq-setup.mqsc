@@ -1,0 +1,30 @@
+**********************
+** Connection setup **
+**********************
+** Make sure that you already have TCP/IP listener!
+
+** Just run
+** $MQ_INSTALLATION_PATH/bin/runmqsc <YOUR QM name> < mq-setup.mqsc
+
+** create your personal svrconn type channel
+DEFINE CHANNEL(JVM.DEF.SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP);
+
+** setup channel auth
+SET CHLAUTH(JVM.DEF.*) TYPE(BLOCKUSER) USERLIST('nobody');
+
+** refresh security cache
+REFRESH SECURITY(*);
+
+DEFINE QLOCAL (RFH.QTEST.SMALL.BK) +
+       MAXDEPTH (1000) +
+       USAGE (NORMAL) +
+       MAXMSGL(512) +
+       REPLACE;
+
+DEFINE QLOCAL (RFH.QTEST.SMALL) +
+       MAXDEPTH (1000) +
+       USAGE (NORMAL) +
+       BOQNAME('RFH.QTEST.SMALL.BK') +
+       BOTHRESH(1) +
+       MAXMSGL(512) +
+       REPLACE;

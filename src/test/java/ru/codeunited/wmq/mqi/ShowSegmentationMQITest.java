@@ -12,7 +12,6 @@ import ru.codeunited.wmq.mqi.impl.QueueManagerFactoryImpl;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -20,7 +19,6 @@ import static com.ibm.mq.constants.MQConstants.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertThat;
-import ru.codeunited.wmq.Utils;
 
 /**
  * codeunited.ru
@@ -58,6 +56,7 @@ public class ShowSegmentationMQITest {
         byte[] sentMessageID = null;
         byte[] gotMessageID = null;
 
+        // this is our big data block, it's bigger when MAXMSGL of the queue
         byte[] bigBlock = Utils.generateRandomBytes(BIG_BLOCK);
 
         try {

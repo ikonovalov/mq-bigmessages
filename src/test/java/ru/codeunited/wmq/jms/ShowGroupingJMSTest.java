@@ -9,12 +9,10 @@ import ru.codeunited.wmq.jms.impl.ConnectionFactoryImpl;
 
 import javax.jms.*;
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.Properties;
 import java.util.Random;
 
 import static com.ibm.mq.constants.CMQC.*;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertArrayEquals;
