@@ -7,12 +7,10 @@ import org.junit.Test;
 import ru.codeunited.wmq.Utils;
 import ru.codeunited.wmq.mqi.impl.MessageConsumerImpl;
 import ru.codeunited.wmq.mqi.impl.MessageProducerImpl;
-import ru.codeunited.wmq.mqi.impl.QueueManagerFactoryImpl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import static com.ibm.mq.constants.MQConstants.*;
@@ -25,13 +23,11 @@ import static org.junit.Assert.assertThat;
  * konovalov84@gmail.com
  * Created by ikonovalov on 27.05.15.
  */
-public class ShowSegmentationMQITest {
+public class ShowSegmentationMQITest extends ConnectionTools {
 
     private static final String QUEUE_NAME = "RFH.QTEST.SMALL";
 
     private static final Logger LOG = Logger.getLogger(ShowSegmentationMQITest.class.getName());
-
-    private final QueueManagerFactory managerFactory = new QueueManagerFactoryImpl();
 
     @After
     @Before
@@ -111,28 +107,5 @@ public class ShowSegmentationMQITest {
         }
     }
 
-    static MQQueueManager getManager(QueueManagerFactory managerFactory) throws MQException {
-        MQQueueManager manager;
-        manager = managerFactory.getManager("DEFQM", new Properties() {
-            {
-                put(HOST_NAME_PROPERTY, "localhost");
-                put(PORT_PROPERTY, 1414);
-                put(TRANSPORT_PROPERTY, TRANSPORT_MQSERIES_CLIENT);
-                put(CHANNEL_PROPERTY, "JVM.DEF.SVRCONN");
-                put(USER_ID_PROPERTY, "ikonovalov");
-                //put(PASSWORD_PROPERTY, "");
-            }
-        });
-        return manager;
-    }
 
-    static void close(MQQueueManager manager) {
-        if (manager != null) {
-            try {
-                manager.close();
-            } catch (MQException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

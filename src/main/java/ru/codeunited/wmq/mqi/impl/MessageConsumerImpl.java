@@ -54,7 +54,8 @@ public class MessageConsumerImpl implements MessageConsumer {
         return get(message, options);
     }
 
-    private MQMessage get(MQMessage message, MQGetMessageOptions getMessageOptions) throws NoMessageAvailableException, MQException {
+    @Override
+    public MQMessage get(MQMessage message, MQGetMessageOptions getMessageOptions) throws NoMessageAvailableException, MQException {
         try {
             queue.get(message, getMessageOptions);
         } catch (MQException mqe) {

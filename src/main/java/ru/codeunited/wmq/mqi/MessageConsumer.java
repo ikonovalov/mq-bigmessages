@@ -15,6 +15,8 @@ public interface MessageConsumer extends Closeable {
 
     MQMessage get() throws MQException, NoMessageAvailableException;
 
+    MQMessage get(MQMessage message, MQGetMessageOptions mqGMO) throws MQException, NoMessageAvailableException;
+
     MQMessage get(MQGetMessageOptions mqGMO) throws MQException, NoMessageAvailableException;
 
     MQMessage get(MQGetMessageOptions mqGMO, int wait) throws MQException, NoMessageAvailableException;
